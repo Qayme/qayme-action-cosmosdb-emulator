@@ -1,0 +1,1 @@
+# qayme-action-cosmosdb-emulator
