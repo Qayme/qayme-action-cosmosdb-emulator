@@ -15,4 +15,6 @@ inputs:
     default: "10"
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: 'src/index.js'
+  post: 'src/post.js'
+  post-if: always()
