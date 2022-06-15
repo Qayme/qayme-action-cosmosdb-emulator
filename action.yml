@@ -1,0 +1,18 @@
+name: 'CosmosDB Emulator'
+description: 'Starts CosmosDB emulator'
+inputs:
+  start-timeout:
+    description: "Number of seconds to wait for the emulator to start"
+    required: false
+    default: "30"
+  image-tag:
+    description: "Docker tag of mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator"
+    required: false
+    default: "latest"
+  paritions-count:
+    description: "CosmosDB emulator partitions count"
+    required: false
+    default: "10"
+runs:
+  using: 'node16'
+  main: 'index.js'
