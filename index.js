@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 
 const { waitUntil } = require('async-wait-until/dist/commonjs');
-const { isReady, getCertificate } = require("./readiness");
+const { isReady, getCertificate } = require("./emulator");
 
 const fs = require('fs');
 
