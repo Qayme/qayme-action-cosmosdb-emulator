@@ -17,20 +17,23 @@ async function run() {
         // This is to avoid countint the time to pull the image into the start timeout
         await exec.exec(`docker pull ${fullImageName}`);
 
-        await exec.exec(`docker run -d -p 8081:8081 -p 10251-10254:10251-10254 -e AZURE_COSMOS_EMULATOR_PARTITION_COUNT=${partitionsCount} -e AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true ${fullImageName}`);
+        await exec.exec(`docker run -d --name cosmos -p 8081:8081 -p 10251-10254:10251-10254 -e AZURE_COSMOS_EMULATOR_PARTITION_COUNT=${partitionsCount} -e AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true ${fullImageName}`);
 
         try {
             await waitUntil(
                 () => isReady(),
                 {
                     timeout: startTimeout,
-                    intervalBetweenAttempts: 1000
+                    intervalBetweenAttempts: 2000
                 });
         }
         catch (ex) {
             console.log("HANDLING 2: " + ex);
 
             core.setFailed("The emulator did not get ready in time.");
+
+            await exec.exec("docker logs cosmos");
+
             return;
         }
 
