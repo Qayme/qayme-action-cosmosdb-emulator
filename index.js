@@ -32,8 +32,6 @@ async function run() {
 
             core.setFailed("The emulator did not get ready in time.");
 
-            await exec.exec("docker logs cosmos");
-
             return;
         }
 

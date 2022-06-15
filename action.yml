@@ -4,7 +4,7 @@ inputs:
   start-timeout:
     description: "Number of seconds to wait for the emulator to start"
     required: false
-    default: "30"
+    default: "40"
   image-tag:
     description: "Docker tag of mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator"
     required: false
