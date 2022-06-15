@@ -1,11 +1,24 @@
+const axios = require('axios');
+const https = require('https');
+
+// process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+const axiosClient = axios.create({
+    httpsAgent: new https.Agent({
+        rejectUnauthorized: false
+    })
+});
+
+const certificateUrl = "https://localhost:8081/_explorer/emulator.pem";
+
 module.exports.isReady = async () => {
     try {
-        const url = "https://localhost:8081/_explorer/certificate.pem";
+        await axiosClient.get(certificateUrl);
 
-        // TODO: Only check the response status code (should be 200)
-        // TODO: Ignore SSL errors
+        return true;
     }
     catch (ex) {
+        console.log("HANDLING 1: " + ex);
         console.log("CosmosDB emulator is not ready yet, will retry in a few seconds...");
 
         return false;
@@ -13,5 +26,7 @@ module.exports.isReady = async () => {
 }
 
 module.exports.getCertificate = async () => {
+    const response = await axiosClient.get(certificateUrl);
 
+    return response.data;
 }
