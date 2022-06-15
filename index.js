@@ -44,8 +44,12 @@ async function run() {
 
 async function trustCertificate() {
     const certContent = await getCertificate();
+    const certFilePath = "/usr/local/share/ca-certificates/cosmosdb-emulator.crt";
 
-    await fs.promises.writeFile("/usr/local/share/ca-certificates/cosmosdb-emulator.crt", certContent, 'utf-8');
+    await exec.exec(`touch ${certFilePath}`);
+    await exec.exec(`chmod 777 ${certFilePath}`);
+
+    await fs.promises.writeFile(certFilePath, certContent, 'utf-8');
     
     await exec.exec("update-ca-certificates");
 }
