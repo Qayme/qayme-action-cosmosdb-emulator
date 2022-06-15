@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - ubuntu-18.04
+          # Enable when MSFT fixes the emulator
+          # - ubuntu-20.04
+          # - ubuntu-22.04
+    runs-on: ${{ matrix.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Configure node permissions
+        run: |
+          chmod -R 777 ./node_modules
+
+      - name: Execute action
+        uses: ./
+
+      - name: Run tests against the emulator
+        env:
+          # To force nodejs to load system-wide trusted certificates
+          NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
+        run: yarn test

@@ -1,0 +1,44 @@
+{
+  "name": "qayme-action-cosmosdb-emulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qayme/qayme-action-cosmosdb-emulator.git"
+  },
+  "keywords": [],
+  "author": "Lukas Holota",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Qayme/qayme-action-cosmosdb-emulator/issues"
+  },
+  "homepage": "https://github.com/Qayme/qayme-action-cosmosdb-emulator#readme",
+  "dependencies": {
+    "@actions/core": "^1.8.2",
+    "@actions/exec": "^1.1.1",
+    "@azure/cosmos": "^3.16.1",
+    "async-wait-until": "^2.0.12",
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "jest": "^28.1.1"
+  },
+  "release": {
+    "branches": [
+      "master",
+      {
+        "name": "preview",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github"
+    ]
+  }
+}
