@@ -2,8 +2,6 @@ const axios = require('axios');
 const https = require('https');
 const exec = require('@actions/exec');
 
-// process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
 const axiosClient = axios.create({
     httpsAgent: new https.Agent({
         rejectUnauthorized: false
@@ -19,11 +17,6 @@ module.exports.isReady = async () => {
         return true;
     }
     catch (ex) {
-        console.log("HANDLING 1: " + ex);
-        console.log("CosmosDB emulator is not ready yet, will retry in a few seconds...");
-
-        await exec.exec("docker logs cosmos");
-
         return false;
     }
 }
