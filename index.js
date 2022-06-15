@@ -50,6 +50,8 @@ async function trustCertificate() {
     await exec.exec(`sudo chmod 777 ${certFilePath}`);
 
     await fs.promises.writeFile(certFilePath, certContent, 'utf-8');
+
+    await exec.exec(`sudo cat ${certFilePath}`);
     
     await exec.exec("sudo update-ca-certificates");
 }
