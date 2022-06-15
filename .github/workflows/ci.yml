@@ -11,8 +11,9 @@ jobs:
       matrix:
         image:
           - ubuntu-18.04
-          - ubuntu-20.04
-          - ubuntu-22.04
+          # Enable when MSFT fixes the emulator
+          # - ubuntu-20.04
+          # - ubuntu-22.04
     runs-on: ${{ matrix.image }}
     steps:
       - name: Checkout
