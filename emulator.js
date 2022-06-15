@@ -29,5 +29,5 @@ module.exports.isReady = async () => {
 }
 
 module.exports.downloadCertificate = async () => {
-    await exec.exec(`curl --insecure ${certificateUrl} > sudo tee /usr/local/share/ca-certificates/cosmosdb-emulator.crt`);
+    await exec.exec(`bash -c 'curl --insecure ${certificateUrl} > sudo tee /usr/local/share/ca-certificates/cosmosdb-emulator.crt'`);
 }
