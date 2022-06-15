@@ -28,8 +28,6 @@ module.exports.isReady = async () => {
     }
 }
 
-module.exports.getCertificate = async () => {
-    const response = await axiosClient.get(certificateUrl);
-
-    return response.data;
+module.exports.downloadCertificate = async () => {
+    await exec.exec(`curl --insecure ${certificateUrl} > sudo tee /usr/local/share/ca-certificates/cosmosdb-emulator.crt`);
 }

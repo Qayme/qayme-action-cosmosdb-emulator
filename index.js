@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 
 const { waitUntil } = require('async-wait-until/dist/commonjs');
-const { isReady, getCertificate } = require("./emulator");
+const { isReady, downloadCertificate } = require("./emulator");
 
 const fs = require('fs');
 
@@ -43,16 +43,7 @@ async function run() {
 }
 
 async function trustCertificate() {
-    const certContent = await getCertificate();
-    const certFilePath = "/usr/local/share/ca-certificates/cosmosdb-emulator.crt";
-
-    await exec.exec(`sudo touch ${certFilePath}`);
-    await exec.exec(`sudo chmod 777 ${certFilePath}`);
-
-    await fs.promises.writeFile(certFilePath, certContent, 'utf-8');
-
-    await exec.exec(`sudo cat ${certFilePath}`);
-    
+    await downloadCertificate();  
     await exec.exec("sudo update-ca-certificates");
 }
 
