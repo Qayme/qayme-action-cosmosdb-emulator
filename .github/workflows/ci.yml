@@ -21,6 +21,9 @@ jobs:
           chmod -R 777 ./node_modules
 
       - name: Execute action
+        env:
+          # To force nodejs to load system-wide trusted certificates
+          NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
         uses: ./
 
       - name: Run tests against the emulator
