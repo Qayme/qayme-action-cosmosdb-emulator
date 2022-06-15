@@ -9,7 +9,7 @@ inputs:
     description: "Docker tag of mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator"
     required: false
     default: "latest"
-  paritions-count:
+  partitions-count:
     description: "CosmosDB emulator partitions count"
     required: false
     default: "10"
